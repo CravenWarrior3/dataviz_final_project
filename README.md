@@ -1,6 +1,6 @@
 # Data Visualization and Reproducible Research
 
-> Firstname Lastname. 
+> Ethan Cooper
 
 
 The following is a sample of products created during the _"Data Visualization and Reproducible Research"_ course.
@@ -8,36 +8,31 @@ The following is a sample of products created during the _"Data Visualization an
 
 ## Project 01
 
-In the `project_01/` folder you can find... _[add short description of your revised project here]_
+In the `project_01/` folder you can find two graphs looking at fuel economy and three showing the proportion of vehicle classes overall, and for two selected fuel types.
 
-**Sample data visualization:** 
+**Fuel economy by vehicle class:** 
 
-_[include your favorite visualization from this project here]_
-<img src="https://raw.githubusercontent.com/aalhamadani/dataviz_final_project/main/figures/echarts.png" width="70%" height="70%">
+<img src="figures/fuelEconomy.png" width="70%" height="70%">
 
 
 ## Project 02
 
-In this project, I explored ... _[short description of your revised project goes here]_ Find the code and report in the `project_02/` folder.
+In this project, I explored two ways of looking at weather data in Atlanta and created a map of Florida as an example of importing shapefiles. Find the code and report in the `project_02/` folder.
 
-**Sample data visualization:** 
+**Map of Florida:** 
 
-_[include your favorite visualization from this project here]_
-<img src="https://raw.githubusercontent.com/aalhamadani/dataviz_final_project/main/figures/fl_higher_ed.png" width="80%" height="80%">
-
-(you can place your figures in the `figures/` folder and use the `![](path_to_picture)` option to add the pictures here)
+<img src="figures/florida.png" width="80%" height="80%">
 
 
 ## Project 03
 
-In this project, I explored ... _[short description of the data visualizations you for this part of the project produced goes here]_
+In this project, I recreated different plots using the knowledge that I've learned throughout this course.
 
-**Sample data visualization:** 
+**Temperature density plots:** 
 
-_[include your favorite visualization from this project here]_
-<img src="https://raw.githubusercontent.com/aalhamadani/dataviz_final_project/main/figures/concrete_density.png" width="80%" height="80%">
+<img src="figures/densityPlots.png" width="80%" height="80%">
 
 
 ### Moving Forward
 
-_Please add here a short reflection on what you learned and what you plan to continue exploring in terms of data visualization, data storytelling, reproducible research, and/or related topics._
+Recreating plots that already exist is no longer a challenge, but I've ran into time constraints and a lack of direction when creating my own. I would like to find ways to collect data relevant to my own life or things that I do and use that information to create my own visuals. I have also learned that there can be many approaches to creating a specific graph. Finding a consistent way to organize graphs I create and practicing with each of these approaches may help if I ever need to write a report containing many visuals.
