@@ -1,0 +1,102 @@
+---
+title: "Mini-Project 02"
+output: 
+  html_document:
+    keep_md: true
+    toc: true
+    toc_float: true
+---
+
+# Data Visualization Project 02
+
+```{r message = FALSE}
+library(GGally)
+library(ggthemes)
+library(plotly)
+library(sf)
+library(tidyverse)
+```
+
+```{r}
+weather_raw <- read_csv("../data/atl-weather.csv")
+```
+
+```{r}
+weather_temps <- weather_raw |>
+  pivot_longer(cols = c(temperatureLow,
+                        temperatureHigh),
+               names_to = "temperatureType",
+               values_to = "temperature")
+```
+
+The raw data is shown with a thin line in the background. The thicker lines show a smoothed version of the data, which makes it much easier to view the average temperature throughout the year.
+
+```{r}
+temps_plot <- ggplot(weather_temps,
+                     aes(x = time,
+                         y = temperature,
+                         color = temperatureType)) +
+  geom_line(linewidth = 0.1) +
+  geom_smooth(se = FALSE) +
+  guides(color = "none") +
+  labs(title = "Daily high and low temperatures in Atlanta",
+       subtitle = "January 1, 2019 - January 1, 2020",
+       x = NULL,
+       y = "Fahrenheit") +
+  theme_hc()
+
+ggplotly(temps_plot)
+```
+
+Humidity, cloud cover, and visibility are all closely related. Humidity has a strong effect on visibility separately from any relation to cloud cover as well.
+
+```{r}
+weather_stats <- weather_raw |>
+  select(cloudCover, dewPoint, humidity, visibility)
+```
+
+```{r}
+ggpairs(weather_stats, progress = FALSE)
+```
+
+```{r}
+lakes <- read_sf("../data/Florida_Lakes/Florida_Lakes.shp")
+counties <- read_sf("../data/Florida_Counties/Florida_Counties.shp")
+```
+
+```{r}
+lakes$type <- "water"
+counties <- counties |>
+  mutate(type = ifelse(COUNTYNAME == "POLK", "highlight", "land"))
+
+polk <- counties |>
+  filter(COUNTYNAME == "POLK")
+box <- st_bbox(polk$geometry)
+center <- c(x = (box["xmin"] + box["xmax"]) / 2,
+            y = (box["ymin"] + box["ymax"]) / 2)
+```
+
+The original goal was for this map to be interactive using plotly, but it would run out of memory when trying to save the plot. Polk County is highlighted and annotated on the map, but no data is presented beyond coloring in lakes and drawing outlines of each county.
+
+```{r}
+ggplot() +
+  geom_sf(data = counties,
+          mapping = aes(fill = type),
+          linewidth = 0.1) +
+  geom_sf(data = lakes,
+          mapping = aes(fill = type),
+          linewidth = 0.1) +
+  geom_text(aes(x = center[1],
+                y = center[2],
+                label = "Polk County"),
+            color = "black",
+            size = 4) +
+  scale_fill_manual(values = c("land" = "green",
+                               "water" = "blue",
+                               "highlight" = "red")) +
+  guides(fill = "none") +
+  labs(title = "Map of Florida",
+       x = "",
+       y = "") +
+  theme_hc()
+```
